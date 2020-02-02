@@ -58,7 +58,12 @@ const kittyPrompts = {
     // },
     // ...etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    var result = kitties;
+    console.log('og', kitties);
+    result.forEach((cat) => {
+      cat.age += 2;
+    });
+    console.log('beans', result);
     return result;
   }
 };
