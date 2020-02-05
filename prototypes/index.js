@@ -59,11 +59,9 @@ const kittyPrompts = {
     // ...etc]
 
     var result = kitties;
-    console.log('og', kitties);
     result.forEach((cat) => {
       cat.age += 2;
     });
-    console.log('beans', result);
     return result;
   }
 };
@@ -95,11 +93,19 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    //   Var clubPeoples = {};
+    //   For(clubs.length; i++){
+    //     For(clubs[i].length j++) {
+    //         Var person = clubs[i].members[j];
+    //         If(!clubPeoples.hasOwnProperty(person){clubPeoples[person] = [];
+    //     }
+    //         clubPeoples[person].push(clubs[i].club);
+    // }
+    // return clubPeoples
 
     // Annotation:
-    // Write your annotation here as a comment
+    // A nested forEach should work, to first loop over clubs
+    // then on club members
   }
 };
 
@@ -194,11 +200,12 @@ const cakePrompts = {
     // ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.filter(cake => cake.inStock > 0);
     return result;
 
     // Annotation:
-    // Write your annotation here as a comment
+    // You just want to filter the cakes that are currently in stock, so any
+    // cake listed with an inStock value greater than 0
   },
 
   totalInventory() {
