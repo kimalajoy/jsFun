@@ -93,15 +93,18 @@ const clubPrompts = {
     //   ...etc
     // }
 
-    //   Var clubPeoples = {};
-    //   For(clubs.length; i++){
-    //     For(clubs[i].length j++) {
-    //         Var person = clubs[i].members[j];
-    //         If(!clubPeoples.hasOwnProperty(person){clubPeoples[person] = [];
-    //     }
-    //         clubPeoples[person].push(clubs[i].club);
-    // }
-    // return clubPeoples
+    var clubPeoples = {};
+ 
+    clubs.forEach(function(club){
+      club.members.forEach(function(member){
+        if(!clubPeoples.hasOwnProperty(member)){
+          clubPeoples[member] = [];
+        }
+        clubPeoples[member].push(club.club);
+      });
+    });
+    
+    return clubPeoples;
 
     // Annotation:
     // A nested forEach should work, to first loop over clubs
@@ -172,8 +175,18 @@ const cakePrompts = {
     //    ..etc
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
-    return result;
+    // const result = kitties.filter(cat => cat.color === 'orange').map(orangeCat => orangeCat.name);
+    // return result;
+
+    // let adultPets = pets.filter(pet => {
+    //   return pet.age === 5;
+
+  
+    // const cakeStock = cakes.filter(cake => {
+    //   return cake.cakeFlavor && cake.inStock
+    // });
+    // return cakeStock;
+    
 
     // Annotation:
     // Write your annotation here as a comment
@@ -212,7 +225,7 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.forEach(function);
     return result;
 
     // Annotation:
