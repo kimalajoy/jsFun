@@ -97,7 +97,7 @@ const clubPrompts = {
  
     clubs.forEach(function(club){
       club.members.forEach(function(member){
-        if(!clubPeoples.hasOwnProperty(member)){
+        if(!Object.prototype.hasOwnProperty.call(clubPeoples, member)){
           clubPeoples[member] = [];
         }
         clubPeoples[member].push(club.club);
@@ -140,10 +140,25 @@ const modPrompts = {
     //   { mod: 4, studentsPerInstructor: 8 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = cakes.map(function(obj){
+    //   return {
+    //     flavor: obj.cakeFlavor,
+    //     inStock: obj.inStock
+    //   };
+    // });
+    // return result;
+
+    const result = mods.map(function(obj) {
+      return {
+        mod: obj.mod,
+        studentsPerInstructor: obj.students / obj.instructors
+      };
+    });
     return result;
 
     // Annotation:
+    // so you probably want to reduce, and then you're going to want
+    // to divide the students by the teachers
     // Write your annotation here as a comment
   }
 };
@@ -174,18 +189,14 @@ const cakePrompts = {
     //    { flavor: 'yellow', inStock: 14 },
     //    ..etc
     // ]
-
-    // const result = kitties.filter(cat => cat.color === 'orange').map(orangeCat => orangeCat.name);
-    // return result;
-
-    // let adultPets = pets.filter(pet => {
-    //   return pet.age === 5;
-
   
-    // const cakeStock = cakes.filter(cake => {
-    //   return cake.cakeFlavor && cake.inStock
-    // });
-    // return cakeStock;
+    const result = cakes.map(function(obj){
+      return {
+        flavor: obj.cakeFlavor,
+        inStock: obj.inStock
+      };
+    });
+    return result;
     
 
     // Annotation:
@@ -225,7 +236,11 @@ const cakePrompts = {
     // Return the total amount of cakes in stock e.g.
     // 59
 
-    const result = cakes.forEach(function);
+
+    const result = cakes.reduce((sum, stock) => {
+      sum += stock.inStock;
+      return sum;
+    }, 0);
     return result;
 
     // Annotation:
@@ -237,7 +252,14 @@ const cakePrompts = {
     // every cake in the dataset e.g.
     // ['dutch process cocoa', 'toasted sugar', 'smoked sea salt', 'berries', ..etc]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach(topping => {
+        if(acc.indexOf(topping) === -1) {
+          acc.push(topping);
+        }
+      });
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
@@ -255,10 +277,21 @@ const cakePrompts = {
     //    ...etc
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.reduce((acc, cake) => {
+      cake.toppings.forEach(function(topping){
+        if(!Object.prototype.hasOwnProperty.call(acc, topping)){
+          acc[topping] = 0;
+        }
+        acc[topping] += 1;
+      });
+      
+      return acc;
+    }, {});
     return result;
 
-    // Annotation:
+    // Annotation: 
+    // The linter didn't like .hasOwnProperty of the object so I switched 
+    // it to this more verbose but more linter approved way
     // Write your annotation here as a comment
   }
 };
