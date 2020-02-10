@@ -323,7 +323,8 @@ const classPrompts = {
     //   { roomLetter: 'G', program: 'FE', capacity: 29 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    const result = classrooms.filter(classroom => classroom.program === 'FE');
     return result;
 
     // Annotation:
@@ -338,7 +339,15 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cakes.map(function(obj){
+      return {
+        flavor: obj.cakeFlavor,
+        inStock: obj.inStock
+      };
+    });
+    return result;
+
+    const result = classrooms
     return result;
 
     // Annotation:
