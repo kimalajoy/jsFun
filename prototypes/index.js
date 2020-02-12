@@ -38,6 +38,7 @@ const kittyPrompts = {
     // Sort the kitties by their age
 
     const result = kitties.sort((a, b) => b.age - a.age);
+    console.log(result);
     return result;
 
     // Annotation:
@@ -339,15 +340,15 @@ const classPrompts = {
     //   beCapacity: 96
     // }
 
-    const result = cakes.map(function(obj){
-      return {
-        flavor: obj.cakeFlavor,
-        inStock: obj.inStock
-      };
-    });
-    return result;
 
-    const result = classrooms
+    const result = classrooms.reduce((acc, classroom) => {
+      if(classroom.program === 'FE') {
+        acc.feCapacity += classroom.capacity;
+      } else {
+        acc.beCapacity += classroom.capacity;
+      }
+      return acc;
+    }, {feCapacity: 0, beCapacity: 0});
     return result;
 
     // Annotation:
@@ -357,7 +358,7 @@ const classPrompts = {
   sortByCapacity() {
     // Return the array of classrooms sorted by their capacity (least capacity to greatest)
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = classrooms.sort((a, b) => a.capacity - b.capacity);
     return result;
 
     // Annotation:
@@ -383,8 +384,9 @@ const bookPrompts = {
     //   'The Curious Incident of the Dog in the Night - Time', 'The Bell Jar',
     //   'Catch-22', 'Treasure Island']
 
-
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter(book => book.genre != 'Horror' && book.genre != 'True Crime')
+      .map(filterBook => filterBook.title);
+    
     return result;
 
     // Annotation:
@@ -399,7 +401,14 @@ const bookPrompts = {
     //  { title: 'Life of Pi', year: 2001 },
     //  { title: 'The Curious Incident of the Dog in the Night-Time', year: 2003 }]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = books.filter((book) => {
+      return book.published >= 1990;
+    }).map((currentBook) => {
+      return {
+        title: currentBook.title,
+        year: currentBook.published
+      };
+    });
     return result;
 
     // Annotation:
@@ -422,7 +431,16 @@ const weatherPrompts = {
     // return an array of all the average temperatures. Eg:
     // [ 40, 40, 44.5, 43.5, 57, 35, 65.5, 62, 14, 46.5 ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // nationalParks.map((park) => {
+    //   return {
+    //     [park.location]: park.name
+    //   }
+    // })
+    
+    
+    const result = weather.map((temps) => {
+      return (temps.temperature.high + temps.temperature.low) / 2;
+    });
     return result;
 
     // Annotation:
@@ -436,7 +454,11 @@ const weatherPrompts = {
     // 'New Orleans, Louisiana is sunny.',
     // 'Raleigh, North Carolina is mostly sunny.' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.filter((sun) => {
+      return sun.type == 'sunny' || sun.type == 'mostly sunny';
+    }).map((sunny) => {
+      return `${sunny.location} is ${sunny.type}.`;
+    });
     return result;
 
     // Annotation:
