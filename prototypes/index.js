@@ -474,7 +474,8 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = weather.sort((a, b) => { a.humidity - b.humidity;
+    }).find(humidity)
     return result;
 
     // Annotation:
