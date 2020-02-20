@@ -474,9 +474,8 @@ const weatherPrompts = {
     //   temperature: { high: 49, low: 38 }
     // }
 
-    const result = weather.sort((a, b) => { a.humidity - b.humidity;
-    }).find(humidity)
-    return result;
+    const result = weather.sort((a, b) => b.humidity - a.humidity);
+    return result[0];
 
     // Annotation:
     // Write your annotation here as a comment
@@ -502,7 +501,14 @@ const nationalParksPrompts = {
     //   parksVisited: ["Rocky Mountain", "Acadia", "Zion"]
     //}
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = nationalParks.reduce((acc, parks) => {
+      if(parks.visited === true) {
+        acc.parksToVisit += parks.name;
+      } else {
+        acc.parksVisited += parks.name;
+      }
+      return acc;
+    }, {parksToVisit: 0, parksVisited: 0});
     return result;
 
     // Annotation:
@@ -519,7 +525,12 @@ const nationalParksPrompts = {
     // { Florida: 'Everglades' } ]
 
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    const result = nationalParks.map((park) => {
+      return {
+        [park.location]: park.name
+      };
+    });
     return result;
 
     // Annotation:
@@ -542,7 +553,15 @@ const nationalParksPrompts = {
     //   'backpacking',
     //   'rock climbing' ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+
+    const result = nationalParks.reduce((acc, activities) => {
+      activities.activities.forEach(activity => {
+        if(acc.indexOf(activity) === -1) {
+          acc.push(activity);
+        }
+      });
+      return acc;
+    }, []);
     return result;
 
     // Annotation:
@@ -569,10 +588,26 @@ const breweryPrompts = {
     // Return the total beer count of all beers for every brewery e.g.
     // 40
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // const result = breweries.reduce((acc, currentElement) => {
+    //   acc += currentElement.beers;
+    //   currentElement.beers.reduce((acc1, currentEl) => {
+    //     acc += currentEl.name;
+    //     console.log(currentEl.name);
+    //     return acc1;
+    //   }, 0);
+    //   return acc;
+    // }, 0);
+
+    const result = breweries.reduce((acc, currentElement) => {
+      acc += currentElement.beers.length;
+      console.log(currentElement.beers.length);
+      return acc;
+    }, 0);
+
     return result;
 
-    // Annotation:
+    // Annotation: I now have a list of all the beers from all the
+    // breweries but I don't know how to sum them now?
     // Write your annotation here as a comment
   },
 
