@@ -600,7 +600,6 @@ const breweryPrompts = {
 
     const result = breweries.reduce((acc, currentElement) => {
       acc += currentElement.beers.length;
-      console.log(currentElement.beers.length);
       return acc;
     }, 0);
 
@@ -620,10 +619,30 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    // nationalParks.map((park) => {
+    //   return {
+    //     [park.location]: park.name
+
+    const result = breweries.reduce((acc, brews) => {
+      acc += brews.beers;
+      return acc;
+    }, []);
+
+    const getBeer =result.map((callBack) => {
+      return [{
+        name: [breweries.name],
+        beerCount: [result.length]
+      }];
+    });
+    console.log(getBeer);
+
     return result;
 
+   
+
     // Annotation:
+    // ok so I have this showing the number of beers per brewery and
+    // but now I want a map, but like, how?
     // Write your annotation here as a comment
   },
 
