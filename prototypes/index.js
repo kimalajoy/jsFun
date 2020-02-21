@@ -619,22 +619,12 @@ const breweryPrompts = {
     // ...etc.
     // ]
 
-    // nationalParks.map((park) => {
-    //   return {
-    //     [park.location]: park.name
 
-    const result = breweries.reduce((acc, brews) => {
-      acc += brews.beers;
+    const result = breweries.reduce((acc, brew) => {
+      acc.push({name: brew.name,
+        beerCount: brew.beers.length});
       return acc;
     }, []);
-
-    const getBeer =result.map((callBack) => {
-      return [{
-        name: [breweries.name],
-        beerCount: [result.length]
-      }];
-    });
-    console.log(getBeer);
 
     return result;
 
@@ -651,7 +641,15 @@ const breweryPrompts = {
     // e.g.
     // { name: 'Barrel Aged Nature\'s Sweater', type: 'Barley Wine', abv: 10.9, ibu: 40 }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = breweries.reduce((acc, currentElement) => { 
+      let allBeers = [];
+      allBeers = allBeers.concat(currentElement.beers);
+      allBeers.sort((a, b) => {
+        return b.abv - a.abv;
+      });
+
+      return acc = allBeers[0];
+    }, 0);
     return result;
 
     // Annotation:
