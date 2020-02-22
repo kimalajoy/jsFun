@@ -697,10 +697,19 @@ const turingPrompts = {
     //  { name: 'Robbie', studentCount: 18 }
     // ]
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.map((instructor) => {
+      return {
+        name: instructor.name,
+        studentCount: cohorts.find((cohort) => 
+          instructor.module === cohort.module
+        ).studentCount
+      };
+    });
     return result;
 
     // Annotation:
+    // currentEl.name = name of teacher
+    // cohorts.studentCount = studentCount
     // Write your annotation here as a comment
   },
 
@@ -711,7 +720,14 @@ const turingPrompts = {
     // cohort1804: 10.5
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = cohorts.reduce((cohortSize, cohort) => {
+      cohortSize['cohort' + cohort.cohort] = cohort.studentCount / instructors.filter(teacher => {
+        if (teacher.module === cohort.module) {
+          return true;
+        }
+      }).length;
+      return cohortSize;
+    }, {});
     return result;
 
     // Annotation:
