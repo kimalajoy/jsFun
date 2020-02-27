@@ -749,10 +749,29 @@ const turingPrompts = {
     //     Will: [1, 2, 3, 4]
     //   }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc, currentEl) => { 
+      if(!acc[currentEl.name]) {
+        acc[currentEl.name] = [currentEl.module];
+      }
+      currentEl.teaches.forEach(skill => {
+        cohorts.forEach(currentCohort => {
+          if(currentCohort.curriculum.includes(skill) && !acc[currentEl.name].includes(currentCohort.module)) {
+            acc[currentEl.name].push(currentCohort.module);
+            acc[currentEl.name].sort((a, b) => a - b);
+          }
+        });
+      });
+      console.log(acc);
+      return acc;
+
+    }, {});
     return result;
 
-    // Annotation:
+    // Annotation: I have 2 arrays of objects and
+    // I want to get back an object
+    // key = instructor name
+    //value = modules they can teach
+    // will need to compare instructors.teaches to cohorts.curriculum
     // Write your annotation here as a comment
   },
 
@@ -766,10 +785,22 @@ const turingPrompts = {
     //   recursion: [ 'Pam', 'Leta' ]
     // }
 
-    const result = 'REPLACE WITH YOUR RESULT HERE';
+    const result = instructors.reduce((acc,currentEl) => {
+      currentEl.teaches.forEach(skill => {
+        if (!acc[skill]) {
+          acc[skill] = [currentEl.name];
+        } else if (acc[skill]) {
+          acc[skill].push(currentEl.name);
+        }
+      });
+      return acc;
+    }, {});
     return result;
 
     // Annotation:
+    // I want to get back an object 
+    // key is curriculum topic and value is and array of instructors
+    //will want to compare instructors.teaches to cohorts.curriculum
     // Write your annotation here as a comment
   }
 };
